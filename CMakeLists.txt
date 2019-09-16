@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/test.cmake)
 INCLUDE(cmake/python.cmake)
+INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/hpp.cmake)
 
 SET(PROJECT_NAME hpp-centroidal-dynamics)
@@ -24,11 +25,11 @@ MESSAGE( STATUS "CMAKE_CXX_FLAGS: " ${CMAKE_CXX_FLAGS} )
 OPTION (BUILD_PYTHON_INTERFACE "Build the python binding" ON)
 IF(BUILD_PYTHON_INTERFACE)
 # search for python
-	FINDPYTHON(2.7 EXACT REQUIRED)
-	find_package( PythonLibs 2.7 REQUIRED )
+	FINDPYTHON()
 	include_directories( ${PYTHON_INCLUDE_DIRS} )
 
-	find_package( Boost COMPONENTS python REQUIRED )
+	SET(BOOST_COMPONENTS python)
+	SEARCH_FOR_BOOST()
 	include_directories( ${Boost_INCLUDE_DIR} )
 
 ENDIF(BUILD_PYTHON_INTERFACE)
